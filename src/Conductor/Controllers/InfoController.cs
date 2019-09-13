@@ -5,12 +5,17 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using Conductor.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Conductor.Controllers
 {
+    [ApiVersion("1.0")]
     [Route("api/[controller]")]
     [ApiController]
+#if UseAuthentication
+    [Authorize]
+#endif
     public class InfoController : ControllerBase
     {
         [HttpGet]

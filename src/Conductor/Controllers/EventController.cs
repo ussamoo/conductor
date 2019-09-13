@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Conductor.Domain.Interfaces;
 using Conductor.Domain.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json.Linq;
@@ -12,8 +13,12 @@ using WorkflowCore.Interface;
 
 namespace Conductor.Controllers
 {
+    [ApiVersion("1.0")]
     [Route("api/[controller]")]
     [ApiController]
+#if UseAuthentication
+    [Authorize]
+#endif
     public class EventController : ControllerBase
     {
         private readonly IWorkflowController _workflowController;

@@ -7,6 +7,7 @@ using AutoMapper;
 using Conductor.Domain.Interfaces;
 using Conductor.Domain.Models;
 using Conductor.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json.Linq;
@@ -14,8 +15,12 @@ using WorkflowCore.Interface;
 
 namespace Conductor.Controllers
 {
+    [ApiVersion("1.0")]
     [Route("api/[controller]")]
     [ApiController]
+#if UseAuthentication
+    [Authorize]
+#endif
     public class WorkflowController : ControllerBase
     {
         private readonly IWorkflowController _workflowController;

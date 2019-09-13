@@ -4,13 +4,18 @@ using System.Linq;
 using System.Threading.Tasks;
 using Conductor.Domain.Interfaces;
 using Conductor.Domain.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Conductor.Controllers
 {
+    [ApiVersion("1.0")]
     [Route("api/[controller]")]
     [ApiController]
+#if UseAuthentication
+    [Authorize]
+#endif
     public class DefinitionController : ControllerBase
     {
         private readonly IDefinitionService _service;

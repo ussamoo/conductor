@@ -69,7 +69,7 @@ namespace Conductor
 
             services.AddWorkflow(cfg =>
             {
-                cfg.UseMongoDB(dbConnectionStr, Configuration.GetValue<string>("DbName"));
+                cfg.UseMySQL(dbConnectionStr,true,true);
                 if (!string.IsNullOrEmpty(redisConnectionStr))
                 {
                     cfg.UseRedisLocking(redisConnectionStr);

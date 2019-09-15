@@ -14,6 +14,7 @@ using Conductor.Helpers;
 using Conductor.Mappings;
 using Conductor.Steps;
 using Conductor.Storage;
+using Conductor.Storage.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -79,7 +80,9 @@ namespace Conductor
             services.ConfigureDomainServices();
             services.ConfigureScripting();
             services.AddSteps();
-            services.UseMongoDB(dbConnectionStr, Configuration.GetValue<string>("DbName"));
+            // services.UseMongoDB(dbConnectionStr, Configuration.GetValue<string>("DbName"));
+
+            EntityFrameworkConfiguration.ConfigureService(services, Configuration);
 
             if (string.IsNullOrEmpty(redisConnectionStr))
                 services.AddSingleton<IClusterBackplane, LocalBackplane>();
